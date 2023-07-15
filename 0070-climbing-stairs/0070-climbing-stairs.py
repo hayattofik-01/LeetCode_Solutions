@@ -1,15 +1,14 @@
 class Solution:
-    def __init__(self):
-        self.memo = defaultdict(int)
+    
     def climbStairs(self, n: int) -> int:
-        # n = 0
-        if n == 1:
-            return 1
-        if n == 2:
-            return 2
-        if n in self.memo:
-            return self.memo[n]
+        # at 0th stair
+        n1 = 1
+        # at 1st stair
+        n2 = 1
         
-        self.memo[n] = self.climbStairs(n-1) + self.climbStairs(n-2)
-        
-        return self.memo[n]
+        for i in range(2,n + 1):
+            val = n1 + n2 
+            n1 = n2 
+            n2 = val 
+        return n2
+     

@@ -1,17 +1,21 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        n=len(prices)
-        # dp=[[0]*2 for i in range(n+2)]
-        ahd=[0]*2
-        ahd2=[0]*2
-        for i in range(n-1,-1,-1):
-            curr=[0]*2
-            for buy in range(2):
-                if buy:
-                    curr[buy]=max(ahd[buy],ahd[0]-prices[i])
-                else:
-                    curr[buy]=max(ahd[buy],ahd2[1]+prices[i])
-            ahd2=ahd[:]
-            ahd=curr[:]
-        return ahd[1]
+        profit = 0
+        dp = {}
+        def dfs(i,cur):
+            
+            if i  >= len(prices):
+                return 0 
+            if (i,cur) in dp:
+                return dp[(i,cur)]
+            if cur == "b":
+                dp[(i,cur)] = max(profit - prices[i]  + dfs(i + 1 , "s"), dfs(i + 1, cur))
+            if cur ==  "s": 
+                dp[(i,cur)] = max(profit + prices[i] + dfs(i + 1, "c"),dfs(i + 1 , cur ))
+            if cur == "c": 
+                dp[(i,cur)] = dfs(i+1 ,"b")
+                
+            return dp[(i,cur)]
+        return dfs(0,"b")
+                
         

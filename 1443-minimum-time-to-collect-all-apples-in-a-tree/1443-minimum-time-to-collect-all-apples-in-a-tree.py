@@ -5,7 +5,7 @@ class Solution:
             adjList[edge[0]].append(edge[1])
             adjList[edge[1]].append(edge[0])
         visited = set()
-        self.sec = 0
+    
 
         def dfs(start):
             if start in visited or not adjList[start]:
@@ -17,7 +17,7 @@ class Solution:
                 if child not in visited:
                     subtree_sec = dfs(child)
                     if subtree_sec or hasApple[child]:
-                        self.sec += 2 + subtree_sec
+                        
                         total_sec += 2 + subtree_sec
 
             return total_sec

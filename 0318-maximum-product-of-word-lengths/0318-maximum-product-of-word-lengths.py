@@ -3,7 +3,7 @@ class Solution:
         def getBitmask(word):
             bitmask = 0
             for char in word:
-                bitmask |= 1 << (ord(char) - ord('a'))
+                bitmask |= 1 << ord(char)
             return bitmask
 
         word_bitmasks = {}

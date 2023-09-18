@@ -1,9 +1,8 @@
 class Solution:
     def minSteps(self, n: int) -> int:
         
-        ans = 0 
+        cache = defaultdict(int)
         def dp( onstack, cur):
-            nonlocal ans 
           
             if cur > n:
                 return float('inf')
@@ -13,8 +12,9 @@ class Solution:
             p = float('inf')
             if onstack:
                 p = dp(onstack, cur + onstack) + 1
+            cache[(onstack,cur)] = min(p,cp)
                 
-            return min(p,cp)
+            return  cache[(onstack,cur)] 
                 
             
     

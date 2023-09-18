@@ -8,6 +8,8 @@ class Solution:
                 return float('inf')
             if cur == n:
                 return 0
+            if (onstack,cur) in cache:
+                return cache[(onstack,cur)]
             cp = dp(cur, cur + cur) +   2
             p = float('inf')
             if onstack:

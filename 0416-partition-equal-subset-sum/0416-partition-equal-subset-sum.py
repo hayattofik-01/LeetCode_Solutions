@@ -15,8 +15,7 @@ class Solution:
             if (i,total) in dp:
                 return dp[(i,total)]
         
-            cur = False
-            dp[(i,total)] = cur or dfs(i + 1,total + nums[i]) or dfs(i + 1 ,total)
+            dp[(i,total)] = dfs(i + 1,total + nums[i]) or dfs(i + 1 ,total)
             
             return dp[(i,total)]
             

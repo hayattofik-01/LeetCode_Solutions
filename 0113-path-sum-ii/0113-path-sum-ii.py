@@ -7,26 +7,21 @@
 class Solution:
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
         ans = []
-
-    
         def helper(node,sum_,path):
-          
+            
             if not node:
-                return
-            sum_ += node.val
+                return 
             path.append(node.val)
-            if not node.left and not node.right and sum_== targetSum:
-
+            if not node.left and not node.right and  sum_ + node.val  == targetSum:
+                
                 ans.append(path.copy())
+            
+            
                 
             
-            helper(node.left,sum_,path)
-            
-            helper(node.right,sum_,path)
+            helper(node.left,sum_  + node.val,path)
+            helper(node.right,sum_ + node.val,path)
             path.pop()
-            
-            
-            
             
         helper(root,0,[])
         

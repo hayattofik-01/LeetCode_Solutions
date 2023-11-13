@@ -1,36 +1,31 @@
-class ListNode:
-    '''a class for a node which is used 
-    in and doubly linked list'''
-    def __init__ (self,val , prev = None , next = None):
-        self.val = val
-        self.next = next 
-        self.prev = prev
 
 class BrowserHistory:
 
     def __init__(self, homepage: str):
-        self.cur = ListNode(homepage)
+        self.realLen = 1
+        self.curpos = 0
+        self.history = [homepage]
        
     def visit(self, url: str) -> None:
+        if len(self.history) < self.curpos + 2:
+            self.history.append(url)
+        else:
+            self.history[self.curpos + 1] = url
+        self.curpos +=1
+        self.realLen = self.curpos + 1
         
-        self.cur.next = ListNode(val = url , prev = self.cur)
-        self.cur = self.cur.next
        
         
     def back(self, steps: int) -> str:
+        self.curpos = max(self.curpos - steps ,0)
+        return self.history[self.curpos]
         
-        while self.cur.prev and steps > 0:
-            self.cur = self.cur.prev
-            steps -=1
-        return self.cur.val
      
 
     def forward(self, steps: int) -> str:
-        while self.cur.next and steps > 0:
-            self.cur = self.cur.next
-            steps -=1
-        return self.cur.val
-        
+        self.curpos = min(self.curpos + steps, self.realLen - 1)
+        return self.history[self.curpos]
+     
 
 
 # Your BrowserHistory object will be instantiated and called as such:
